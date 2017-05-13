@@ -37,10 +37,11 @@ function deleteNote(noteId) {
         var notebookName;
         try {
             var notebookName = null;
-            console.log("to be deleted: " + noteId);
             var note = EN.notebooks()[0].notes.byId(noteId);
             notebookName = note.notebook().name();
             EN.delete(note);
+        } catch (e) {
+            //console.log(e);
         } finally {
             return notebookName;
         }
@@ -49,18 +50,16 @@ function deleteNote(noteId) {
 function createNotebook(nbName) {
     if (!findNotebook(nbName)) {
         return runJxa.sync((nbName) => {
-            return Application("Evernote").createNotebook(nbName, { withType: "local only" });
+            return Application("Evernote").createNotebook(nbName, { withType: "local only" }).name();
         }, [nbName]);
     }
 }
 
 function deleteNotebook(nbName) {
-    if (findNotebook(nbName)) {
-        return runJxa.sync((nbName) => {
+    return findNotebook(nbName) ? (runJxa.sync((nbName) => {
             const EN = Application("Evernote");
-            EN.delete(app.notebooks.byName(nbName));
-        }, [nbName]);
-    }
+            EN.delete(EN.notebooks.byName(nbName));
+        }, [nbName]), true) : false;
 }
 
 function findNotebook(nbName) {
