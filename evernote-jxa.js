@@ -21,11 +21,13 @@ function createNote(namedParamFilePath) {
             app.closeAccess(file);
         }
 
-        paramObj.attachments.forEach(function(item, index){
-        paramObj.attachments[index] = Path(item);
+        if (paramObj.attachments) {
+            paramObj.attachments.forEach(function (item, index) {
+                paramObj.attachments[index] = Path(item);
+            });
+        }
 
         return EN.createNote(paramObj).id().trim();
-    });
 
     }, [namedParamFilePath]);
 }
@@ -35,7 +37,7 @@ function deleteNote(noteId) {
         var notebookName;
         try {
             var notebookName = null;
-            var noteId = argv[0];
+            console.log("to be deleted: " + noteId);
             var note = EN.notebooks()[0].notes.byId(noteId);
             notebookName = note.notebook().name();
             EN.delete(note);
@@ -52,6 +54,15 @@ function createNotebook(nbName) {
     }
 }
 
+function deleteNotebook(nbName) {
+    if (findNotebook(nbName)) {
+        return runJxa.sync((nbName) => {
+            const EN = Application("Evernote");
+            EN.delete(app.notebooks.byName(nbName));
+        }, [nbName]);
+    }
+}
+
 function findNotebook(nbName) {
     return runJxa.sync((nbName) => {
         return Application("Evernote").notebooks().find(elem => elem.name() === nbName) !== undefined;
@@ -59,5 +70,5 @@ function findNotebook(nbName) {
 }
 
 module.exports = {
-    createNote, deleteNote, createNotebook, findNotebook
+    createNote, deleteNote, createNotebook, findNotebook, deleteNotebook
 }
