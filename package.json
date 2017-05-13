@@ -1,0 +1,27 @@
+{
+  "name": "evernote-jxa",
+  "version": "0.1.0",
+  "description": "JXA interface for Evernote",
+  "main": "evernote-jxa.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reggiezhang/evernote-jxa.git"
+  },
+  "keywords": [
+    "evernote",
+    "jxa",
+    "applescript"
+  ],
+  "author": "Reggie Zhang",
+  "license": "LGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/reggiezhang/evernote-jxa/issues"
+  },
+  "homepage": "https://github.com/reggiezhang/evernote-jxa#readme",
+  "dependencies": {
+    "run-jxa": "^1.1.0"
+  }
+}
