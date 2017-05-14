@@ -13,6 +13,3 @@ console.log(`note still exists: ${enJxa.deleteNote(createdNoteId) !== null}`);
 
 console.log("Found notebook: " + enJxa.findNotebook(notebookName));
 console.log('notebook deleted: ' + enJxa.deleteNotebook(notebookName));
-
-
-

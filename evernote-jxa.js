@@ -21,6 +21,10 @@ function createNote(namedParamFilePath) {
             app.closeAccess(file);
         }
 
+        if (paramObj.created) {
+            paramObj.created = new Date(paramObj.created);
+        }
+
         if (paramObj.attachments) {
             paramObj.attachments.forEach(function (item, index) {
                 paramObj.attachments[index] = Path(item);
