@@ -3,7 +3,9 @@ var enJxa = require('../evernote-jxa');
 
 
 console.log("Notebook created: " + enJxa.createNotebook('evernote-jxa-test'));
-var createdNoteId = enJxa.createNote('./testParamWithAttachment.json');
+var paramsFilePath = `${__dirname}/testParam.json`;
+console.log(`paramsFile: ${paramsFilePath}`);
+var createdNoteId = enJxa.createNote(paramsFilePath);
 console.log("note created: %s", createdNoteId);
 var notebookName = enJxa.deleteNote(createdNoteId);
 
