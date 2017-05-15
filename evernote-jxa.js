@@ -52,11 +52,9 @@ function deleteNote(noteId) {
     }, [noteId]);
 }
 function createNotebook(nbName) {
-    if (!findNotebook(nbName)) {
-        return runJxa.sync((nbName) => {
+    return findNotebook(nbName) ? nbName : runJxa.sync((nbName) => {
             return Application("Evernote").createNotebook(nbName, { withType: "local only" }).name();
         }, [nbName]);
-    }
 }
 
 function deleteNotebook(nbName) {
