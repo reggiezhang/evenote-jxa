@@ -9,81 +9,78 @@
 const runJxa = require('run-jxa');
 
 function createNote(namedParamFilePath) {
-    return runJxa.sync((namedParamFilePath) => {
-        var EN = Application("Evernote");
-        var app = Application.currentApplication();
-        app.includeStandardAdditions = true;
+  return runJxa.sync((namedParamFilePath) => {
+    let EN = Application('Evernote'); // eslint-disable-line no-undef, new-cap
+    let app = Application.currentApplication(); // eslint-disable-line no-undef, new-cap
+    app.includeStandardAdditions = true;
+    let file = app.openForAccess(Path(namedParamFilePath), {writePermission: false}); // eslint-disable-line no-undef, new-cap
 
-        var file = app.openForAccess(Path(namedParamFilePath), { writePermission: false });
-        var paramObj;
-        if (app.getEof(file) > 0) {
-            paramObj = JSON.parse($.NSString.alloc.initWithUTF8String(app.read(file)).cString);
-            app.closeAccess(file);
-        }
+    let paramObj;
+    if (app.getEof(file) > 0) {
+      paramObj = JSON.parse($.NSString.alloc.initWithUTF8String(app.read(file)).cString); // eslint-disable-line no-undef
+      app.closeAccess(file);
+    }
 
-        if (paramObj.created) {
-            paramObj.created = new Date(paramObj.created);
-        }
+    if (paramObj.created) {
+      paramObj.created = new Date(paramObj.created);
+    }
 
-        if (paramObj.attachments) {
-            paramObj.attachments.forEach(function (item, index) {
-                paramObj.attachments[index] = Path(item);
-            });
-        }
+    if (paramObj.attachments) {
+      paramObj.attachments.forEach(function(item, index) {
+        paramObj.attachments[index] = Path(item); // eslint-disable-line no-undef, new-cap
+      });
+    }
 
-        return EN.createNote(paramObj).id().trim();
-
-    }, [namedParamFilePath]);
+    return EN.createNote(paramObj).id().trim();
+  }, [namedParamFilePath]);
 }
 function deleteNote(noteId) { // workaround solution
-    return runJxa.sync((noteId) => {
-        const EN = Application("Evernote");
-        var notebookName;
-        try {
-            var note = EN.notebooks()[0].notes.byId(noteId);
-            notebookName = note.notebook().name();
-            EN.delete(note);
-        } catch (e) {
-            //console.log(e);
-        } finally {
-            return notebookName;
-        }
-    }, [noteId]);
+  return runJxa.sync((noteId) => {
+    const EN = Application('Evernote'); // eslint-disable-line no-undef, new-cap
+    let notebookName;
+    try {
+      let note = EN.notebooks()[0].notes.byId(noteId);
+      notebookName = note.notebook().name();
+      EN.delete(note);
+    } catch (e) {
+      // console.log(e);
+    }
+    return notebookName;
+  }, [noteId]);
 }
 
 function findNote(noteId) { // workaround solution
-    return runJxa.sync((noteId) => {
-        const EN = Application("Evernote");
-        var noteTitle;
-        try {
-            var note = EN.notebooks()[0].notes.byId(noteId);
-            noteTitle = note.title();
-        } catch (e) {
-            //console.log(e);
-        } finally {
-            return noteTitle !== undefined;;
-        }
-    }, [noteId]);
+  return runJxa.sync((noteId) => {
+    const EN = Application('Evernote'); // eslint-disable-line new-cap, no-undef
+    let noteTitle;
+    try {
+      let note = EN.notebooks()[0].notes.byId(noteId);
+      noteTitle = note.title();
+    } catch (e) {
+      // console.log(e);
+    }
+    return noteTitle !== undefined;
+  }, [noteId]);
 }
 function createNotebook(nbName) {
-    return findNotebook(nbName) ? nbName : runJxa.sync((nbName) => {
-            return Application("Evernote").createNotebook(nbName, { withType: "local only" }).name();
-        }, [nbName]);
+  return findNotebook(nbName) ? nbName : runJxa.sync((nbName) => {
+    return Application('Evernote').createNotebook(nbName, {withType: 'local only'}).name(); // eslint-disable-line no-undef, new-cap
+  }, [nbName]);
 }
 
 function deleteNotebook(nbName) {
-    return findNotebook(nbName) ? (runJxa.sync((nbName) => {
-            const EN = Application("Evernote");
-            EN.delete(EN.notebooks.byName(nbName));
-        }, [nbName]), true) : false;
+  return findNotebook(nbName) ? (runJxa.sync((nbName) => {
+    const EN = Application('Evernote'); // eslint-disable-line no-undef, new-cap
+    EN.delete(EN.notebooks.byName(nbName));
+  }, [nbName]), true) : false;
 }
 
 function findNotebook(nbName) {
-    return runJxa.sync((nbName) => {
-        return Application("Evernote").notebooks().find(elem => elem.name() === nbName) !== undefined;
-    }, [nbName]);
+  return runJxa.sync((nbName) => {
+    return Application('Evernote').notebooks().find((elem) => elem.name() === nbName) !== undefined; // eslint-disable-line no-undef, new-cap
+  }, [nbName]);
 }
 
 module.exports = {
-    createNote, deleteNote, findNote, createNotebook, findNotebook, deleteNotebook
-}
+  createNote, deleteNote, findNote, createNotebook, findNotebook, deleteNotebook,
+};
