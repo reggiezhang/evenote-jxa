@@ -32,8 +32,13 @@ function createNote(namedParamFilePath) {
     }
 
     let note = EN.createNote(paramObj);
-    note.latitude = paramObj.latitude;
-    note.longitude = paramObj.longitude;
+    if (paramObj.latitude) {
+      note.latitude = paramObj.latitude;
+    }
+    if (paramObj.longitude) {
+      note.longitude = paramObj.longitude;
+    }
+
     note.modificationDate = note.creationDate;
     return note.id().trim();
   }, [namedParamFilePath]);
