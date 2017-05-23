@@ -1,6 +1,6 @@
 {
   "name": "evernote-jxa",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "JXA interface for Evernote",
   "main": "evernote-jxa.js",
   "scripts": {
