@@ -12,7 +12,7 @@ let notebookName = enJxa.deleteNote(createdNoteId);
 
 console.log('delete it from: ' + notebookName);
 
-console.log(`note still exists: ${enJxa.deleteNote(createdNoteId) !== null}`);
+console.log(`note still exists: ${enJxa.deleteNote(createdNoteId) !== undefined}`);
 
 console.log('Found notebook: ' + enJxa.findNotebook(notebookName));
 console.log('notebook deleted: ' + enJxa.deleteNotebook(notebookName));

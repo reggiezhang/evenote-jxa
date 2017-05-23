@@ -31,7 +31,10 @@ function createNote(namedParamFilePath) {
       });
     }
 
-    return EN.createNote(paramObj).id().trim();
+    let note = EN.createNote(paramObj);
+    note.latitude = paramObj.latitude;
+    note.longitude = paramObj.longitude;
+    return note.id().trim();
   }, [namedParamFilePath]);
 }
 function deleteNote(noteId) { // workaround solution

@@ -3,7 +3,10 @@
     "withText": "evernote-jxa-test content",
     "title": "evernote-jxa-test title",
     "notebook": "evernote-jxa-test",
+    "latitude": 20,
+    "longitude": 30,
     "attachments": [
+        "./helloworld.txt",
         "./helloworld.txt"
     ],
     "tags": [
