@@ -1,6 +1,6 @@
 {
   "name": "evernote-jxa",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "JXA interface for Evernote",
   "main": "evernote-jxa.js",
   "scripts": {
@@ -27,7 +27,7 @@
     "run-jxa": "^1.2.0"
   },
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.1"
+    "eslint": "^5.1.0",
+    "eslint-config-google": "^0.9.1"
   }
 }

@@ -5,7 +5,8 @@
  * http://www.opensource.org/licenses/lgpl-3.0.html
  *
  */
-'use-strict';
+
+'use strict';
 const runJxa = require('run-jxa');
 
 function createNote(namedParamFilePath) {
